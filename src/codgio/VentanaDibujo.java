@@ -9,7 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import javafx.scene.paint.Color;
+import java.awt.Color;
 
 /**
  *
@@ -42,15 +42,10 @@ public class VentanaDibujo extends javax.swing.JFrame {
         Graphics2D g2 = (Graphics2D) buffer.getGraphics();
         g2.setColor(java.awt.Color.WHITE);
         g2.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
-//        for (int i = 0; i < DIMENSION_ARRAY; i++) {
-////            listaDeshacer[i] = (BufferedImage) jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
-////            listaDeshacer[i].createGraphics();
-////            g2 = (Graphics2D) listaDeshacer[i].getGraphics();
-////            g2.setColor(java.awt.Color.WHITE);
-////            g2.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
-//
+//        for (int i = 0; i < listaCirculos.length; i++) {         
+//            listaCirculos[i] = new Circulo();
 //        }
-
+//        listaCirculos[0].color = Color.ORANGE;
     }
     
     
@@ -58,9 +53,23 @@ public class VentanaDibujo extends javax.swing.JFrame {
     @Override
     public void paint(Graphics g) {
         super.paintComponents(g);
-        //
+          Graphics2D g2 = (Graphics2D) buffer.getGraphics();
+          //Dibujo un cuadro blanco del tamaño del buffer
+          g2.setColor(java.awt.Color.WHITE);
+          g2.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        
+          for (int i = 0; i < indice; i++){
+          //Leo el color del circulo 0
+        g2.setColor(listaCirculos[i].color);
+        if (listaCirculos[i].relleno) {
+            g2.fill(listaCirculos[i]);
+        } else {
+            g2.draw(listaCirculos[i]);
 
-          Graphics2D g2 = (Graphics2D) buffer.getGraphics(); 
+        }
+          }
+          
+          
         //apunto al jPanel
         g2 = (Graphics2D) jPanel1.getGraphics();
         g2.drawImage(buffer, 0, 0, jPanel1.getWidth(), jPanel1.getHeight(), null);
@@ -136,13 +145,23 @@ public class VentanaDibujo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        indice++;
-        repaint();
-        System.out.println(indice)
-        ; 
-        
+//        listaCirculos[indice].x = evt.getX();
+//        listaCirculos[indice].y = evt.getY();
+//        listaCirculos[indice].width = 20;
+//        listaCirculos[indice].height = 20;
+//        listaCirculos[indice].color = Color.ORANGE;
+//        listaCirculos[indice].relleno = true;
+        listaCirculos[indice] = new Circulo(evt.getX(), evt.getY(), 20, Color.ORANGE, true);
+                
+         if (indice<DIMENSION_ARRAY-1){
+             
+             indice++;
+         }
         
        
+        repaint();
+        System.out.println(indice)
+        ;     
              
          
 
